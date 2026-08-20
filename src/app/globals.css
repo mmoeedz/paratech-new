@@ -1,26 +1,288 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surfaces */
+  --color-obsidian: #0b0a09;
+  --color-deep: #14120f;
+  --color-elevated: #1c1916;
+  --color-ivory: #f4f1ea;
+  --color-bone: #eae5db;
+
+  /* Accent */
+  --color-copper: #c08040;
+  --color-copper-light: #d19a5f;
+  --color-copper-ink: #8a5024;
+
+  /* Text on dark surfaces */
+  --color-cloud: #f4f1ea;
+  --color-cloud-soft: #b5afa6;
+  --color-cloud-faint: #8a847b;
+
+  /* Text on light surfaces */
+  --color-ink: #14120f;
+  --color-ink-soft: #4a4540;
+  --color-ink-faint: #6b655e;
+
+  /* Lines */
+  --color-line: #2a2521;
+  --color-line-light: #d8d2c6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-obsidian: var(--color-obsidian);
+  --color-deep: var(--color-deep);
+  --color-elevated: var(--color-elevated);
+  --color-ivory: var(--color-ivory);
+  --color-bone: var(--color-bone);
+
+  --color-copper: var(--color-copper);
+  --color-copper-light: var(--color-copper-light);
+  --color-copper-ink: var(--color-copper-ink);
+
+  --color-cloud: var(--color-cloud);
+  --color-cloud-soft: var(--color-cloud-soft);
+  --color-cloud-faint: var(--color-cloud-faint);
+
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-faint: var(--color-ink-faint);
+
+  --color-line: var(--color-line);
+  --color-line-light: var(--color-line-light);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-obsidian);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-obsidian);
+  color: var(--color-cloud);
+}
+
+::selection {
+  background: var(--color-copper);
+  color: var(--color-obsidian);
+}
+
+/* Visible, on-brand focus ring everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/*
+ * Menu entry animations. Deliberately CSS rather than AnimatePresence: an
+ * exit animation that fails to complete leaves an invisible but still
+ * clickable/focusable panel over the page, so these unmount immediately.
+ * Only opacity/translate on the inner card, so positioning transforms on the
+ * outer wrapper are never overwritten.
+ */
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-menu-in {
+  animation: menu-in 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes drawer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-drawer-in {
+  animation: drawer-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/*
+ * Entrance for the scroll-driven capability card. Re-runs on every step
+ * because the card is keyed by slug, so it re-mounts as the index advances.
+ * The reduced-motion block below neutralises both of these.
+ */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-card-in {
+  animation: card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-line-in {
+  animation: line-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Copper gradient, used as a fill and as clipped text on accent words,
+   step numerals, and the process rail. */
+.bg-grad-copper {
+  background: linear-gradient(135deg, #8a5024 0%, #d19a5f 100%);
+}
+
+.text-grad-copper {
+  background: linear-gradient(135deg, #8a5024 0%, #d19a5f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fine grid texture for dark sections */
+.bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(244, 241, 234, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 241, 234, 0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(80% 60% at 50% 30%, #000 0%, transparent 100%);
+}
+
+.bg-radial-copper {
+  background: radial-gradient(
+    55% 45% at 50% 0%,
+    rgba(192, 128, 64, 0.14) 0%,
+    rgba(192, 128, 64, 0) 72%
+  );
+}
+
+/* Animated workflow connectors */
+.flow-line-h {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(192, 128, 64, 0.06),
+    rgba(192, 128, 64, 0.45) 50%,
+    rgba(192, 128, 64, 0.06)
+  );
+  overflow: hidden;
+}
+
+.flow-line-h::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: var(--color-copper);
+  box-shadow: 0 0 10px 2px rgba(192, 128, 64, 0.6);
+  animation: flow-x 3s linear infinite;
+}
+
+.flow-line-v {
+  position: relative;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(192, 128, 64, 0.06),
+    rgba(192, 128, 64, 0.45) 50%,
+    rgba(192, 128, 64, 0.06)
+  );
+  overflow: hidden;
+}
+
+.flow-line-v::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: var(--color-copper);
+  box-shadow: 0 0 10px 2px rgba(192, 128, 64, 0.6);
+  animation: flow-y 2.6s linear infinite;
+}
+
+@keyframes flow-x {
+  0% {
+    left: -8px;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes flow-y {
+  0% {
+    top: -7px;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Honour the user's motion preference for decorative loops */
+@media (prefers-reduced-motion: reduce) {
+  .flow-line-h::after,
+  .flow-line-v::after {
+    animation: none;
+    opacity: 0.9;
+    left: 50%;
+    top: 50%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
