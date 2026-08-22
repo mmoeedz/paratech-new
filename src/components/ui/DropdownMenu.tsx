@@ -35,12 +35,19 @@ export function DropdownMenu({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suppressedRef = useRef(false);
+  // A click on the toggle button is preceded by its own mouseenter on the
+  // wrapper, which opens the panel via hover before the click handler ever
+  // runs. Without this flag, that same click reads `open` as already true
+  // and immediately toggles it back closed — so a mouse user clicking the
+  // chevron from outside the group never sees the panel stay open.
+  const justHoverOpenedRef = useRef(false);
   const panelId = useId();
 
   const close = () => setOpen(false);
 
   const dismiss = () => {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    justHoverOpenedRef.current = false;
     // Only suppress hover if the pointer is still physically over the group —
     // otherwise the next genuine hover would be swallowed.
     const stillHovered =
@@ -56,6 +63,14 @@ export function DropdownMenu({
     if (suppressedRef.current) return;
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
     setOpen(true);
+  };
+
+  // Only the mouse-hover path needs the just-opened flag: a keyboard Tab
+  // also opens via focus, but Enter to close it afterwards must work on the
+  // first press, not be swallowed as if it were the opening interaction.
+  const openViaHover = () => {
+    justHoverOpenedRef.current = true;
+    openNow();
   };
 
   const closeSoon = () => {
@@ -100,7 +115,7 @@ export function DropdownMenu({
     <div
       ref={wrapperRef}
       className="relative"
-      onMouseEnter={openNow}
+      onMouseEnter={openViaHover}
       onMouseLeave={() => {
         allowHoverAgain();
         closeSoon();
@@ -127,6 +142,10 @@ export function DropdownMenu({
           aria-controls={open ? panelId : undefined}
           aria-label={`${open ? "Hide" : "Show"} ${label} menu`}
           onClick={() => {
+            if (justHoverOpenedRef.current) {
+              justHoverOpenedRef.current = false;
+              return;
+            }
             if (open) {
               dismiss();
             } else {

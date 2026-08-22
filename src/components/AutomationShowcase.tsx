@@ -1,6 +1,7 @@
 import { Reveal } from "./Reveal";
 import { Section, SectionHeading } from "./ui/Section";
 import { WorkflowDiagram } from "./WorkflowDiagram";
+import { WORKFLOWS } from "@/data/workflows";
 
 const NODES = [
   "Lead capture",
@@ -9,33 +10,6 @@ const NODES = [
   "Personalised email",
   "Follow-up",
   "Sales team",
-];
-
-const WORKFLOWS = [
-  {
-    title: "Lead generation",
-    flow: "Website form → AI qualification → CRM → notification → automated follow-up",
-  },
-  {
-    title: "Customer support",
-    flow: "Customer message → AI agent → knowledge base → response → escalation when needed",
-  },
-  {
-    title: "Content operations",
-    flow: "Topic → research → draft generation → human approval → publishing",
-  },
-  {
-    title: "Reporting",
-    flow: "Business data → analysis → dashboard → scheduled report → recommendations",
-  },
-  {
-    title: "Appointments",
-    flow: "Lead → qualification → calendar → booking → reminders → CRM update",
-  },
-  {
-    title: "Internal operations",
-    flow: "Form or input → processing → database → task creation → notification",
-  },
 ];
 
 export function AutomationShowcase() {

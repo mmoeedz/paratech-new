@@ -11,6 +11,11 @@ export function generateStaticParams() {
   return SERVICE_CATEGORIES.map((category) => ({ slug: category.slug }));
 }
 
+// Only these four slugs are ever valid, so an unlisted one should 404 at
+// the routing layer rather than rendering a dynamic fallback — without
+// this, notFound() renders the right content but ships it with a 200.
+export const dynamicParams = false;
+
 export async function generateMetadata(
   props: PageProps<"/services/[slug]">
 ): Promise<Metadata> {
@@ -68,10 +73,10 @@ export default async function ServiceCategoryPage(
                 {category.intro}
               </p>
               <Link
-                href="/contact"
+                href={`/contact?service=${encodeURIComponent(category.title)}`}
                 className="group mt-9 inline-flex items-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-medium text-obsidian transition-colors hover:bg-copper-light"
               >
-                Discuss your project
+                {category.ctaLabel}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
@@ -162,7 +167,10 @@ export default async function ServiceCategoryPage(
         </div>
       </Section>
 
-      <CTA />
+      <CTA
+        primaryLabel={category.ctaLabel}
+        primaryHref={`/contact?service=${encodeURIComponent(category.title)}`}
+      />
     </>
   );
 }

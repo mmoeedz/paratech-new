@@ -13,7 +13,7 @@ export default function WorkPage() {
   return (
     <>
       <CaseStudies />
-      <CTA />
+      <CTA primaryLabel="Discuss a similar project" />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { ServicesScroll } from "@/components/ServicesScroll";
 import { HowWeWork } from "@/components/HowWeWork";
-import { ExploreLinks } from "@/components/ExploreLinks";
+import { HowWeAutomate } from "@/components/HowWeAutomate";
 import { CTA } from "@/components/CTA";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
       <ServicesScroll />
       <HowWeWork />
-      <ExploreLinks />
+      <HowWeAutomate />
       <CTA />
     </>
   );

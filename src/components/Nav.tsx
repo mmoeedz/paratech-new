@@ -16,12 +16,22 @@ const LINKS = [
 
 type MobileSection = "services";
 
+/** Visible, non-disabled elements a keyboard user can tab to, in DOM order. */
+function getFocusable(container: HTMLElement): HTMLElement[] {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((el) => el.offsetParent !== null);
+}
+
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [openSection, setOpenSection] = useState<MobileSection | null>(null);
   const pathname = usePathname();
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const toggleSection = (section: MobileSection) =>
     setOpenSection((current) => (current === section ? null : section));
@@ -63,7 +73,10 @@ export function Nav() {
     };
   }, [open]);
 
-  // Send focus into the menu on open, and support closing with Escape.
+  // Send focus into the menu on open, close on Escape, and trap Tab/Shift+Tab
+  // to the toggle button plus the panel's own controls — the rest of the
+  // page is inert, but without this a Tab at either end still escapes to
+  // browser chrome instead of cycling back through the dialog.
   useEffect(() => {
     if (!open) return;
     firstLinkRef.current?.focus();
@@ -71,6 +84,30 @@ export function Nav() {
       if (event.key === "Escape") {
         closeMenu();
         toggleBtnRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const panel = panelRef.current;
+      const toggle = toggleBtnRef.current;
+      if (!panel || !toggle) return;
+
+      const focusables = [toggle, ...getFocusable(panel)];
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey) {
+        if (active === first || !focusables.includes(active as HTMLElement)) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else if (
+        active === last ||
+        !focusables.includes(active as HTMLElement)
+      ) {
+        event.preventDefault();
+        first.focus();
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -81,7 +118,11 @@ export function Nav() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-obsidian/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4 lg:px-8">
-        <Link href="/" className="flex items-center text-cloud">
+        <Link
+          href="/"
+          tabIndex={open ? -1 : undefined}
+          className="flex items-center text-cloud"
+        >
           <Logo />
         </Link>
 
@@ -145,6 +186,7 @@ export function Nav() {
           invisible, still-focusable panel over the page. */}
       {open && (
         <div
+          ref={panelRef}
           id="mobile-nav-panel"
           role="dialog"
           aria-modal="true"

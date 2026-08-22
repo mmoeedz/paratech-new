@@ -16,6 +16,8 @@ export type ServiceCategory = {
   intro: string;
   /** The single outcome this category is bought for. */
   outcome: string;
+  /** Intent-specific CTA label, used instead of a generic "Start a project". */
+  ctaLabel: string;
   services: Service[];
 };
 
@@ -29,6 +31,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     intro:
       "Most businesses lose hours every day to work that follows a predictable pattern — chasing leads, re-typing data between tools, answering the same questions, assembling the same reports. We build systems that handle that work automatically, and escalate to a person only when judgement is genuinely required.",
     outcome: "Work that moves forward without someone pushing it",
+    ctaLabel: "Get an automation assessment",
     services: [
       {
         title: "AI Lead Response & Qualification",
@@ -76,6 +79,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     intro:
       "A website should do more than exist, and internal software should fit how your team already works. We design and build both — from conversion-focused marketing sites to the operational systems that replace spreadsheets and disconnected SaaS tools.",
     outcome: "Digital products that earn their keep",
+    ctaLabel: "Plan your website or system",
     services: [
       {
         title: "Web Development",
@@ -118,6 +122,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     intro:
       "Demand for what you do already exists — the question is whether you show up when someone goes looking. We build organic and paid visibility together, so you're not renting all of your traffic, and we measure everything against enquiries rather than impressions.",
     outcome: "Qualified traffic that converts, not just clicks",
+    ctaLabel: "Request a growth audit",
     services: [
       {
         title: "SEO",
@@ -160,6 +165,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     intro:
       "Most businesses already have the data they need — it's just spread across tools that don't talk to each other. We unify it, then build the dashboards and automated reporting that turn it into something you can actually run the business on.",
     outcome: "One clear view of how the business is performing",
+    ctaLabel: "Discuss your reporting workflow",
     services: [
       {
         title: "Business Dashboards",

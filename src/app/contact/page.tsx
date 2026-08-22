@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import { Eyebrow } from "@/components/ui/Section";
 import { ContactForm } from "@/components/ContactForm";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact — Paratech",
@@ -28,7 +29,12 @@ const FAQ = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage(props: PageProps<"/contact">) {
+  const searchParams = await props.searchParams;
+  const serviceParam = searchParams.service;
+  const defaultService =
+    typeof serviceParam === "string" ? serviceParam : undefined;
+
   return (
     <>
       <section className="relative overflow-hidden bg-obsidian pt-36 pb-24 sm:pt-44 lg:pt-52 lg:pb-32">
@@ -54,10 +60,10 @@ export default function ContactPage() {
                     Email
                   </p>
                   <a
-                    href="mailto:hello@paratech.agency"
+                    href={`mailto:${SITE.email}`}
                     className="mt-2 inline-block text-base font-medium text-copper transition-colors hover:text-cloud"
                   >
-                    hello@paratech.agency
+                    {SITE.email}
                   </a>
                 </div>
                 <div>
@@ -73,7 +79,7 @@ export default function ContactPage() {
 
             <Reveal delay={0.08}>
               <div className="rounded-xl border border-line bg-deep/60 p-7 lg:p-9">
-                <ContactForm />
+                <ContactForm defaultService={defaultService} />
               </div>
             </Reveal>
           </div>

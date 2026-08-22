@@ -28,15 +28,39 @@ function PTMark({ className = "" }: { className?: string }) {
   );
 }
 
-export function Logo({ className = "" }: { className?: string }) {
+export function Logo({
+  className = "",
+  size = "md",
+}: {
+  className?: string;
+  size?: "md" | "lg";
+}) {
+  const isLarge = size === "lg";
+
   return (
     <span className={`flex items-center ${className}`}>
-      <PTMark className="h-7 w-auto shrink-0 sm:h-8" />
+      <PTMark
+        className={
+          isLarge
+            ? "h-20 w-auto shrink-0 sm:h-24"
+            : "h-7 w-auto shrink-0 sm:h-8"
+        }
+      />
       <span
         aria-hidden="true"
-        className="mx-2.5 h-6 w-px shrink-0 bg-current opacity-25 sm:mx-3 sm:h-7"
+        className={
+          isLarge
+            ? "mx-4 h-8 w-px shrink-0 bg-current opacity-25 sm:mx-5 sm:h-9"
+            : "mx-2.5 h-6 w-px shrink-0 bg-current opacity-25 sm:mx-3 sm:h-7"
+        }
       />
-      <span className="text-[13px] font-semibold uppercase leading-none tracking-[0.2em] sm:text-[15px]">
+      <span
+        className={
+          isLarge
+            ? "text-xl font-semibold uppercase leading-none tracking-[0.2em] sm:text-2xl"
+            : "text-[13px] font-semibold uppercase leading-none tracking-[0.2em] sm:text-[15px]"
+        }
+      >
         Paratech
       </span>
     </span>

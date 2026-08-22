@@ -6,7 +6,13 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { Reveal } from "./Reveal";
 import { ArrowRight } from "./ui/Icons";
 
-export function CTA() {
+export function CTA({
+  primaryLabel = "Start a project",
+  primaryHref = "/contact",
+}: {
+  primaryLabel?: string;
+  primaryHref?: string;
+} = {}) {
   const reduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -48,10 +54,10 @@ export function CTA() {
         <Reveal delay={0.14}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href="/contact"
+              href={primaryHref}
               className="group inline-flex items-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-medium text-obsidian transition-colors hover:bg-copper-light"
             >
-              Start a project
+              {primaryLabel}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link

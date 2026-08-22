@@ -1,16 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { SERVICE_CATEGORIES } from "@/data/services";
+import { BUDGETS, NOT_SURE_SERVICE } from "@/data/contact";
 import { ArrowRight } from "./ui/Icons";
-
-const BUDGETS = [
-  "Not sure yet",
-  "Under $5k",
-  "$5k – $15k",
-  "$15k – $50k",
-  "$50k+",
-];
+import { submitContactForm, type ContactState } from "@/app/contact/actions";
 
 const fieldClass =
   "w-full rounded-lg border border-line bg-obsidian/60 px-4 py-3 text-base text-cloud placeholder:text-cloud-faint transition-colors focus:border-copper focus:outline-none sm:text-sm";
@@ -18,39 +12,73 @@ const fieldClass =
 const labelClass =
   "block font-mono text-[10px] uppercase tracking-[0.16em] text-cloud-faint";
 
-export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+const errorClass = "mt-1.5 text-xs text-red-400";
 
-  // No backend is wired up yet, so this composes a pre-filled email rather
-  // than silently dropping the enquiry.
+const initialState: ContactState = { status: "idle" };
+
+const VALID_SERVICES = [
+  ...SERVICE_CATEGORIES.map((category) => category.title),
+  NOT_SURE_SERVICE,
+];
+
+export function ContactForm({
+  defaultService,
+}: {
+  /** Pre-selects the service dropdown, e.g. from a page-specific CTA link. */
+  defaultService?: string;
+}) {
+  const preselectedService =
+    defaultService && VALID_SERVICES.includes(defaultService)
+      ? defaultService
+      : SERVICE_CATEGORIES[0].title;
+
+  const [state, setState] = useState<ContactState>(initialState);
+  const [isPending, startTransition] = useTransition();
+  const formRef = useRef<HTMLFormElement>(null);
+  const sourceUrlRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (sourceUrlRef.current) {
+      sourceUrlRef.current.value = window.location.href;
+    }
+  }, []);
+
+  const errors = state.fieldErrors ?? {};
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus("sending");
+    const formData = new FormData(event.currentTarget);
 
-    const data = new FormData(event.currentTarget);
-    const lines = [
-      `Name: ${data.get("name")}`,
-      `Company: ${data.get("company") || "—"}`,
-      `Email: ${data.get("email")}`,
-      `Phone: ${data.get("phone") || "—"}`,
-      `Interested in: ${data.get("service")}`,
-      `Budget: ${data.get("budget")}`,
-      "",
-      "What they want to improve:",
-      String(data.get("message") ?? ""),
-    ];
-
-    const subject = encodeURIComponent(
-      `New enquiry — ${data.get("service")} — ${data.get("name")}`
-    );
-    const body = encodeURIComponent(lines.join("\n"));
-
-    window.location.href = `mailto:hello@paratech.agency?subject=${subject}&body=${body}`;
-    setStatus("sent");
+    startTransition(async () => {
+      const result = await submitContactForm(state, formData);
+      setState(result);
+      // Only clear the visitor's input once we know the enquiry went
+      // through — an error must never make them retype everything.
+      if (result.status === "success") {
+        formRef.current?.reset();
+      }
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-5">
+      {/* Honeypot — hidden from real visitors, catnip for bots that fill
+          every field. Never display:none, so naive scrapers still find it. */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+      >
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+      <input type="hidden" name="sourceUrl" ref={sourceUrlRef} />
+
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
@@ -61,10 +89,12 @@ export function ContactForm() {
             name="name"
             type="text"
             required
+            minLength={2}
             autoComplete="name"
             placeholder="Your name"
             className={`mt-2.5 ${fieldClass}`}
           />
+          {errors.name && <p className={errorClass}>{errors.name}</p>}
         </div>
         <div>
           <label htmlFor="company" className={labelClass}>
@@ -95,6 +125,7 @@ export function ContactForm() {
             placeholder="you@company.com"
             className={`mt-2.5 ${fieldClass}`}
           />
+          {errors.email && <p className={errorClass}>{errors.email}</p>}
         </div>
         <div>
           <label htmlFor="phone" className={labelClass}>
@@ -119,7 +150,7 @@ export function ContactForm() {
           <select
             id="service"
             name="service"
-            defaultValue={SERVICE_CATEGORIES[0].title}
+            defaultValue={preselectedService}
             className={`mt-2.5 ${fieldClass}`}
           >
             {SERVICE_CATEGORIES.map((category) => (
@@ -127,7 +158,7 @@ export function ContactForm() {
                 {category.title}
               </option>
             ))}
-            <option value="Not sure / a mix">Not sure / a mix</option>
+            <option value={NOT_SURE_SERVICE}>{NOT_SURE_SERVICE}</option>
           </select>
         </div>
         <div>
@@ -158,25 +189,34 @@ export function ContactForm() {
           id="message"
           name="message"
           required
+          minLength={20}
           rows={5}
           placeholder="The workflow, page, or process that's costing you the most right now."
           className={`mt-2.5 resize-y ${fieldClass}`}
         />
+        {errors.message && <p className={errorClass}>{errors.message}</p>}
       </div>
 
       <div className="flex flex-wrap items-center gap-4 pt-1">
         <button
           type="submit"
-          disabled={status === "sending"}
+          disabled={isPending}
           className="group inline-flex items-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-medium text-obsidian transition-colors hover:bg-copper-light disabled:opacity-70"
         >
-          Send enquiry
+          {isPending ? "Sending…" : "Send enquiry"}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </button>
-        <p aria-live="polite" className="text-xs text-cloud-faint">
-          {status === "sent"
-            ? "Your email client should have opened — hit send and we'll reply within one business day."
-            : "We reply within one business day."}
+        <p
+          aria-live="polite"
+          className={`text-xs ${
+            state.status === "error" ? "text-red-400" : "text-cloud-faint"
+          }`}
+        >
+          {state.status === "success"
+            ? state.message
+            : state.status === "error"
+              ? state.message
+              : "We reply within one business day."}
         </p>
       </div>
     </form>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./ui/Logo";
 import { SERVICE_CATEGORIES } from "@/data/services";
+import { SITE } from "@/lib/site";
 
 const COMPANY = [
   { label: "Services", href: "/services" },
@@ -18,17 +19,17 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-10 lg:grid-cols-[1.5fr_1fr_1fr]">
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center text-cloud">
-              <Logo />
+              <Logo size="lg" />
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-cloud-soft">
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-cloud-soft">
               A digital growth, technology, and AI automation partner. We design,
               build, grow, and automate the systems behind modern businesses.
             </p>
             <a
-              href="mailto:hello@paratech.agency"
+              href={`mailto:${SITE.email}`}
               className="mt-6 inline-block text-sm font-medium text-copper transition-colors hover:text-cloud"
             >
-              hello@paratech.agency
+              {SITE.email}
             </a>
           </div>
 
