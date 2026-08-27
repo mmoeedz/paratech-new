@@ -55,10 +55,10 @@ const CASES = [
 function Beat({ label, children }: { label: string; children: string }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-cloud-faint">
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
         {label}
       </p>
-      <p className="mt-1.5 text-[13px] leading-relaxed text-cloud-soft">
+      <p className="mt-1.5 text-[13px] leading-relaxed text-ink-soft">
         {children}
       </p>
     </div>
@@ -67,22 +67,24 @@ function Beat({ label, children }: { label: string; children: string }) {
 
 function CaseCard({ item }: { item: (typeof CASES)[number] }) {
   return (
-    <div className="flex h-full flex-col border border-line bg-deep/60 p-5 lg:h-[540px]">
-      <span className="font-mono text-[10px] text-copper">{item.number}</span>
+    <div className="flex h-full flex-col border border-line-light bg-bone p-5 lg:h-[540px]">
+      <span className="font-mono text-[10px] text-copper-ink">
+        {item.number}
+      </span>
 
-      <h2 className="mt-3 text-lg font-semibold leading-snug tracking-[-0.01em] text-cloud">
+      <h2 className="mt-3 text-lg font-semibold leading-snug tracking-[-0.01em] text-ink">
         {item.client}
       </h2>
-      <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-cloud-faint">
+      <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
         {item.capability} · {item.sector}
       </p>
 
       {/* The number this engagement is remembered for */}
-      <div className="mt-5 border-y border-line py-4">
-        <p className="text-lg font-semibold leading-tight tracking-[-0.02em] text-copper">
+      <div className="mt-5 border-y border-line-light py-4">
+        <p className="text-lg font-semibold leading-tight tracking-[-0.02em] text-copper-ink">
           {item.metric.value}
         </p>
-        <p className="mt-1.5 text-[11px] leading-snug text-cloud-faint">
+        <p className="mt-1.5 text-[11px] leading-snug text-ink-faint">
           {item.metric.label}
         </p>
       </div>
@@ -96,11 +98,11 @@ function CaseCard({ item }: { item: (typeof CASES)[number] }) {
         {item.stack.map((tag) => (
           <li
             key={tag}
-            className="flex items-center gap-2 text-[11px] text-cloud-faint"
+            className="flex items-center gap-2 text-[11px] text-ink-faint"
           >
             <span
               aria-hidden="true"
-              className="h-[4px] w-[4px] shrink-0 bg-copper"
+              className="h-[4px] w-[4px] shrink-0 bg-copper-ink"
             />
             {tag}
           </li>
@@ -112,11 +114,10 @@ function CaseCard({ item }: { item: (typeof CASES)[number] }) {
 
 export function CaseStudies() {
   return (
-    <Section tone="dark" isPageTop>
-      <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
-
+    <Section tone="light" isPageTop>
       <SectionHeading
         as="h1"
+        tone="light"
         eyebrow="Selected work"
         title="Built for outcomes the business can feel."
         lead="A sample of engagements across all four capabilities. Client names are withheld where the work touches internal systems."

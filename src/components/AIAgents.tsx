@@ -49,16 +49,16 @@ export function AIAgents() {
           </ul>
         </div>
 
-        <Reveal delay={0.1}>
+        <Reveal delay={0.1} className="lg:mt-9">
           <div className="rounded-xl border border-line bg-obsidian/70 p-7 lg:p-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-cloud-faint">
+            <h3 className="text-sm font-semibold tracking-[-0.01em] text-cloud">
               Agent architecture
-            </p>
+            </h3>
             <ol className="mt-7 flex flex-col">
               {ARCHITECTURE.map((step, i) => (
                 <li key={step.label} className="flex flex-col">
                   <div className="flex items-baseline gap-3">
-                    <span className="font-mono text-[10px] text-copper">
+                    <span className="font-mono text-2xs text-copper">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div>
@@ -73,7 +73,7 @@ export function AIAgents() {
                   {i < ARCHITECTURE.length - 1 && (
                     <span
                       aria-hidden="true"
-                      className="my-2.5 ml-[5px] h-5 w-px bg-line"
+                      className="my-2.5 ml-[5px] h-5 w-0.5 bg-cloud-faint/50"
                     />
                   )}
                 </li>

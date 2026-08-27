@@ -215,3 +215,18 @@ export function GridMark({
     </span>
   );
 }
+
+/** Bare checkmark for dense list rows, where the circled version is too loud. */
+export function CheckIcon({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="m3.5 8.5 3 3 6-7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

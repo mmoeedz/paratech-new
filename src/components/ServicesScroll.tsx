@@ -229,6 +229,8 @@ export function ServicesScroll() {
                         <button
                           type="button"
                           onClick={() => goTo(i)}
+                          onMouseEnter={() => setActive(i)}
+                          onFocus={() => setActive(i)}
                           aria-current={isActive ? "true" : undefined}
                           // Tailwind v4 emits the standalone `translate`
                           // property, not `transform` — transitioning only

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 type Tone = "dark" | "light";
 
-/** Small uppercase mono label that opens a section. */
+/** Pill-shaped label that opens a section. */
 export function Eyebrow({
   children,
   tone = "dark",
@@ -12,15 +12,12 @@ export function Eyebrow({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] ${
-        tone === "dark" ? "text-copper" : "text-copper-ink"
+      className={`inline-block rounded-full border px-3.5 py-1.5 text-[13px] font-semibold uppercase tracking-[0.18em] ${
+        tone === "dark"
+          ? "border-copper/25 bg-copper/[0.08] text-copper"
+          : "border-copper/20 bg-copper/[0.06] text-copper-ink"
       }`}
     >
-      <span
-        className={`h-[3px] w-[3px] rounded-full ${
-          tone === "dark" ? "bg-copper" : "bg-copper-ink"
-        }`}
-      />
       {children}
     </span>
   );

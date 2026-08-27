@@ -12,7 +12,7 @@ export function WorkflowDiagram({ nodes }: { nodes: string[] }) {
           <li key={node} className="flex flex-1 items-center last:flex-none">
             <Reveal delay={i * 0.07} y={10} className="shrink-0">
               <div className="flex w-[132px] flex-col gap-2 rounded-lg border border-line bg-elevated px-4 py-3.5">
-                <span className="font-mono text-[10px] text-copper">
+                <span className="font-mono text-2xs text-copper">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="text-sm font-medium leading-snug text-cloud">
@@ -36,7 +36,7 @@ export function WorkflowDiagram({ nodes }: { nodes: string[] }) {
           <li key={node} className="flex w-full flex-col items-center">
             <Reveal delay={i * 0.06} y={10} className="w-full max-w-[260px]">
               <div className="flex flex-col gap-2 rounded-lg border border-line bg-elevated px-4 py-3.5">
-                <span className="font-mono text-[10px] text-copper">
+                <span className="font-mono text-2xs text-copper">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="text-sm font-medium text-cloud">{node}</span>

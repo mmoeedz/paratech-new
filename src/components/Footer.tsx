@@ -6,7 +6,6 @@ import { SITE } from "@/lib/site";
 const COMPANY = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Process", href: "/#process" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
@@ -27,19 +26,19 @@ export function Footer() {
             </p>
             <a
               href={`mailto:${SITE.email}`}
-              className="mt-6 inline-block text-sm font-medium text-copper transition-colors hover:text-cloud"
+              className="mt-6 inline-block text-sm font-medium text-cloud-soft transition-colors hover:text-copper"
             >
               {SITE.email}
             </a>
           </div>
 
           <nav aria-labelledby="footer-services">
-            <p
+            <h3
               id="footer-services"
-              className="font-mono text-[10px] uppercase tracking-[0.18em] text-cloud-faint"
+              className="font-mono text-2xs uppercase tracking-[0.18em] text-cloud-faint"
             >
               Services
-            </p>
+            </h3>
             <ul className="mt-5 flex flex-col gap-3">
               {SERVICE_CATEGORIES.map((category) => (
                 <li key={category.slug}>
@@ -55,12 +54,12 @@ export function Footer() {
           </nav>
 
           <nav aria-labelledby="footer-company">
-            <p
+            <h3
               id="footer-company"
-              className="font-mono text-[10px] uppercase tracking-[0.18em] text-cloud-faint"
+              className="font-mono text-2xs uppercase tracking-[0.18em] text-cloud-faint"
             >
               Company
-            </p>
+            </h3>
             <ul className="mt-5 flex flex-col gap-3">
               {COMPANY.map((item) => (
                 <li key={item.href}>

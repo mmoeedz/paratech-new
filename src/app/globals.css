@@ -53,6 +53,10 @@
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
   --font-mono: var(--font-geist-mono);
+
+  /* Shared size for uppercase mono micro-labels — replaces the ad hoc
+     text-[10px]/text-[11px] values scattered across eyebrows and labels. */
+  --text-2xs: 0.6875rem;
 }
 
 html {
@@ -180,6 +184,102 @@ body {
   );
 }
 
+/* Blueprint grid: fine cells with a heavier line every fourth, pooled by a
+   radial mask. Denser and warmer than .bg-grid-dark, which stays the default
+   texture for dark sections. */
+.bg-blueprint {
+  --cell: 34px;
+  background-image:
+    linear-gradient(to right, rgba(209, 154, 95, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(209, 154, 95, 0.12) 1px, transparent 1px),
+    linear-gradient(to right, rgba(209, 154, 95, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(209, 154, 95, 0.18) 1px, transparent 1px);
+  background-size:
+    var(--cell) var(--cell),
+    var(--cell) var(--cell),
+    calc(var(--cell) * 4) calc(var(--cell) * 4),
+    calc(var(--cell) * 4) calc(var(--cell) * 4);
+  mask-image: radial-gradient(70% 60% at 50% 35%, #000, transparent 100%);
+}
+
+/* Two off-centre copper blooms, so the ground behind the grid isn't flat. */
+.bg-bloom-copper {
+  background:
+    radial-gradient(
+      48rem 30rem at 78% 8%,
+      rgba(184, 113, 44, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      40rem 26rem at 12% 88%,
+      rgba(184, 113, 44, 0.12),
+      transparent 62%
+    );
+}
+
+/* Light-ground counterpart of the copper blooms. Copper reads far louder on
+   paper than on obsidian, so the alpha drops to roughly half the dark version
+   — same warmth, no orange wash. */
+.bg-bloom-copper-light {
+  background:
+    radial-gradient(
+      48rem 30rem at 78% 8%,
+      rgba(184, 113, 44, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      40rem 26rem at 12% 88%,
+      rgba(184, 113, 44, 0.05),
+      transparent 62%
+    );
+}
+
+/* --- Seamless marquee ----------------------------------------------------
+   The track holds N identical copies of the row. Each copy carries a trailing
+   gap and the track carries none, so the copies are exactly 100/N% each and
+   shifting by one copy lands on the next with no seam. N is above 2 so the
+   track still overflows very wide viewports, where a single copy would run
+   out and leave a blank stretch. */
+.marquee-viewport {
+  overflow: clip;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--speed, 38s) linear infinite;
+}
+
+.marquee-copy {
+  display: flex;
+  gap: var(--gap, 1rem);
+  padding-inline-end: var(--gap, 1rem);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--shift, -50%));
+  }
+}
+
+/* Pause on hover so a name can actually be read — pointer devices only,
+   since there is no hover to leave on a touchscreen. */
+@media (hover: hover) and (pointer: fine) {
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
 /* Animated workflow connectors */
 .flow-line-h {
   position: relative;
@@ -269,6 +369,16 @@ body {
 
 /* Honour the user's motion preference for decorative loops */
 @media (prefers-reduced-motion: reduce) {
+  /* Stopped rather than sped up: the rows become a scrollable strip, so the
+     names past the fold are still reachable. */
+  .marquee-track {
+    animation: none;
+  }
+
+  .marquee-viewport {
+    overflow-x: auto;
+  }
+
   .flow-line-h::after,
   .flow-line-v::after {
     animation: none;
