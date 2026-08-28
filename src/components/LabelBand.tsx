@@ -20,6 +20,10 @@ import {
   SiCalendly,
   SiZillow,
   SiShopify,
+  SiGooglegemini,
+  SiIntercom,
+  SiZoho,
+  SiMixpanel,
 } from "@icons-pack/react-simple-icons";
 
 // Direct product matches get their own logo. The rest are category labels
@@ -40,6 +44,10 @@ const TOOL_LOGOS: Record<string, ComponentType<{ size?: number; color?: string }
   "Analytics & attribution": SiGoogleanalytics,
   "Webhooks & APIs": SiZapier,
   "Scheduled reporting": SiGooglesheets,
+  "AI automation": SiGooglegemini,
+  "Chatbot integration": SiIntercom,
+  "CRM software": SiZoho,
+  "Data analysis": SiMixpanel,
 };
 
 // Same idea for the sectors row — no single brand owns an industry, so each
@@ -70,12 +78,16 @@ const TOOLS = [
   "Next.js",
   "TypeScript",
   "Python",
+  "AI automation",
   "Language models",
+  "Chatbot integration",
   "CRM integrations",
+  "CRM software",
   "WhatsApp & SMS",
   "Google Ads",
   "Google Business Profile",
   "Analytics & attribution",
+  "Data analysis",
   "Postgres",
   "Webhooks & APIs",
   "Scheduled reporting",
