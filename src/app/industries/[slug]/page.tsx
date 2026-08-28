@@ -5,7 +5,9 @@ import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/Section";
 import { ArrowRight } from "@/components/ui/Icons";
 import { CTA } from "@/components/CTA";
+import { JsonLd } from "@/components/JsonLd";
 import { INDUSTRIES, getIndustry } from "@/data/industries";
+import { SITE } from "@/lib/site";
 
 export function generateStaticParams() {
   return INDUSTRIES.map((industry) => ({ slug: industry.slug }));
@@ -24,10 +26,18 @@ export async function generateMetadata(
 
   if (!industry) return { title: "Industries — Paratech" };
 
+  const title = `${industry.title} — Paratech`;
+
   return {
-    title: `${industry.title} — Paratech`,
+    title,
     description: industry.short,
     alternates: { canonical: `/industries/${industry.slug}` },
+    openGraph: {
+      title,
+      description: industry.short,
+      url: `/industries/${industry.slug}`,
+    },
+    twitter: { title, description: industry.short },
   };
 }
 
@@ -42,8 +52,43 @@ export default async function IndustryPage(
   // A few, not all nine — this is a "see more" nudge, not a full directory.
   const others = INDUSTRIES.filter((item) => item.slug !== slug).slice(0, 3);
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `AI Automation for ${industry.title}`,
+    description: industry.short,
+    provider: { "@type": "ProfessionalService", name: SITE.name, url: SITE.url },
+    areaServed: "Worldwide",
+    audience: { "@type": "Audience", audienceType: industry.subtitle },
+    url: `${SITE.url}/industries/${industry.slug}`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: industry.title,
+      itemListElement: industry.services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.description,
+        },
+      })),
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Industries", item: `${SITE.url}/industries` },
+      { "@type": "ListItem", position: 2, name: industry.title, item: `${SITE.url}/industries/${industry.slug}` },
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-obsidian pt-36 pb-20 sm:pt-44 lg:pt-52 lg:pb-24">
         <div className="pointer-events-none absolute inset-0 bg-grid-dark" />

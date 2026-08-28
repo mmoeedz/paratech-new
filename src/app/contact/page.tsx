@@ -2,13 +2,19 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import { Section, Eyebrow } from "@/components/ui/Section";
 import { ContactForm } from "@/components/ContactForm";
+import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
+const TITLE = "Contact — Paratech";
+const DESCRIPTION =
+  "Tell us what you're trying to design, build, grow, or automate. We reply within one business day.";
+
 export const metadata: Metadata = {
-  title: "Contact — Paratech",
-  description:
-    "Tell us what you're trying to design, build, grow, or automate. We reply within one business day.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "/contact" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "/contact" },
+  twitter: { title: TITLE, description: DESCRIPTION },
 };
 
 const FAQ = [
@@ -35,8 +41,20 @@ export default async function ContactPage(props: PageProps<"/contact">) {
   const defaultService =
     typeof serviceParam === "string" ? serviceParam : undefined;
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={faqSchema} />
+
       <Section tone="light" isPageTop>
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>

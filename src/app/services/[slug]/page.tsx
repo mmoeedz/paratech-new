@@ -5,7 +5,9 @@ import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/Section";
 import { ArrowRight, GridMark } from "@/components/ui/Icons";
 import { CTA } from "@/components/CTA";
+import { JsonLd } from "@/components/JsonLd";
 import { SERVICE_CATEGORIES, getServiceCategory } from "@/data/services";
+import { SITE } from "@/lib/site";
 
 export function generateStaticParams() {
   return SERVICE_CATEGORIES.map((category) => ({ slug: category.slug }));
@@ -24,10 +26,18 @@ export async function generateMetadata(
 
   if (!category) return { title: "Services — Paratech" };
 
+  const title = `${category.title} — Paratech`;
+
   return {
-    title: `${category.title} — Paratech`,
+    title,
     description: category.short,
     alternates: { canonical: `/services/${category.slug}` },
+    openGraph: {
+      title,
+      description: category.short,
+      url: `/services/${category.slug}`,
+    },
+    twitter: { title, description: category.short },
   };
 }
 
@@ -41,8 +51,42 @@ export default async function ServiceCategoryPage(
 
   const others = SERVICE_CATEGORIES.filter((item) => item.slug !== slug);
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: category.title,
+    description: category.intro,
+    provider: { "@type": "ProfessionalService", name: SITE.name, url: SITE.url },
+    areaServed: "Worldwide",
+    url: `${SITE.url}/services/${category.slug}`,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: category.title,
+      itemListElement: category.services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.description,
+        },
+      })),
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Services", item: `${SITE.url}/services` },
+      { "@type": "ListItem", position: 2, name: category.title, item: `${SITE.url}/services/${category.slug}` },
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-obsidian pt-36 pb-20 sm:pt-44 lg:pt-52 lg:pb-24">
         <div className="pointer-events-none absolute inset-0 bg-grid-dark" />

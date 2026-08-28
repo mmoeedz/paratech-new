@@ -53,11 +53,17 @@ export const metadata: Metadata = {
   },
 };
 
+// Placeholder social links ("#") are left out rather than published as
+// broken/misleading sameAs entries — this list fills in on its own once
+// SITE.social carries real URLs.
+const sameAs = Object.values(SITE.social).filter((url) => url !== "#");
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: SITE.name,
   url: SITE.url,
+  logo: `${SITE.url}/icon.png`,
   email: SITE.email,
   description: SITE.description,
   areaServed: "Worldwide",
@@ -69,6 +75,7 @@ const organizationSchema = {
     "Google Ads Management",
     "Data Analytics",
   ],
+  ...(sameAs.length > 0 ? { sameAs } : {}),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

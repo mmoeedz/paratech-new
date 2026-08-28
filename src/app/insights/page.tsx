@@ -4,16 +4,24 @@ import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ArrowRight } from "@/components/ui/Icons";
 import { CTA } from "@/components/CTA";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE } from "@/lib/site";
+
+const TITLE = "Insights — Paratech";
+const DESCRIPTION =
+  "Practical notes on AI automation, web performance, local search, and building digital systems that hold up in production.";
 
 export const metadata: Metadata = {
-  title: "Insights — Paratech",
-  description:
-    "Practical notes on AI automation, web performance, local search, and building digital systems that hold up in production.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "/insights" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "/insights" },
+  twitter: { title: TITLE, description: DESCRIPTION },
 };
 
 const NOTES = [
   {
+    slug: "automate-the-workflow-not-the-job-title",
     topic: "AI Automation",
     title: "Automate the workflow, not the job title",
     summary:
@@ -22,6 +30,7 @@ const NOTES = [
       "Rank candidate automations by frequency × delay cost, not by novelty.",
   },
   {
+    slug: "speed-of-response-beats-quality-of-pitch",
     topic: "Growth",
     title: "Speed of response beats quality of pitch",
     summary:
@@ -30,6 +39,7 @@ const NOTES = [
       "Measure your median first-response time before spending more on ads.",
   },
   {
+    slug: "build-against-real-data-from-day-one",
     topic: "Web & Software",
     title: "Build against real data from day one",
     summary:
@@ -38,6 +48,7 @@ const NOTES = [
       "If it hasn't run against your actual data, it hasn't been tested.",
   },
   {
+    slug: "a-dashboard-nobody-opens-is-a-cost-not-an-asset",
     topic: "Data & Analytics",
     title: "A dashboard nobody opens is a cost, not an asset",
     summary:
@@ -48,8 +59,24 @@ const NOTES = [
 ];
 
 export default function InsightsPage() {
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Paratech Insights",
+    url: `${SITE.url}/insights`,
+    blogPost: NOTES.map((note) => ({
+      "@type": "BlogPosting",
+      headline: note.title,
+      description: note.summary,
+      url: `${SITE.url}/insights#${note.slug}`,
+      about: note.topic,
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={blogSchema} />
+
       <Section tone="light" isPageTop>
         <SectionHeading
           as="h1"
@@ -62,7 +89,10 @@ export default function InsightsPage() {
         <div className="mt-16 flex flex-col divide-y divide-line-light border-t border-line-light sm:mt-20">
           {NOTES.map((note, i) => (
             <Reveal key={note.title} delay={i * 0.05}>
-              <article className="grid grid-cols-1 gap-6 py-10 lg:grid-cols-[200px_1fr] lg:gap-12 lg:py-12">
+              <article
+                id={note.slug}
+                className="grid grid-cols-1 gap-6 scroll-mt-24 py-10 lg:grid-cols-[200px_1fr] lg:gap-12 lg:py-12"
+              >
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-copper-ink">
                   {note.topic}
                 </p>

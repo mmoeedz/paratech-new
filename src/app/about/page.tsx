@@ -3,11 +3,16 @@ import { About } from "@/components/About";
 import { WhyUs } from "@/components/WhyUs";
 import { CTA } from "@/components/CTA";
 
+const TITLE = "About — Paratech";
+const DESCRIPTION =
+  "A team built around design, engineering, growth, automation, and AI.";
+
 export const metadata: Metadata = {
-  title: "About — Paratech",
-  description:
-    "A team built around design, engineering, growth, automation, and AI.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "/about" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "/about" },
+  twitter: { title: TITLE, description: DESCRIPTION },
 };
 
 export default function AboutPage() {
