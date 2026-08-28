@@ -12,6 +12,14 @@ import {
   SiGoogleanalytics,
   SiZapier,
   SiGooglesheets,
+  SiHomeadvisor,
+  SiAirbnb,
+  SiSquare,
+  SiFedex,
+  SiZoom,
+  SiCalendly,
+  SiZillow,
+  SiShopify,
 } from "@icons-pack/react-simple-icons";
 
 // Direct product matches get their own logo. The rest are category labels
@@ -32,6 +40,19 @@ const TOOL_LOGOS: Record<string, ComponentType<{ size?: number; color?: string }
   "Analytics & attribution": SiGoogleanalytics,
   "Webhooks & APIs": SiZapier,
   "Scheduled reporting": SiGooglesheets,
+};
+
+// Same idea for the sectors row — no single brand owns an industry, so each
+// gets one recognizable, closely-related product rather than plain text.
+const SECTOR_LOGOS: Record<string, ComponentType<{ size?: number; color?: string }>> = {
+  "Home & field services": SiHomeadvisor,
+  Hospitality: SiAirbnb,
+  "Multi-location retail": SiSquare,
+  "Logistics & freight": SiFedex,
+  "Professional services": SiZoom,
+  "Healthcare & clinics": SiCalendly,
+  Property: SiZillow,
+  "E-commerce": SiShopify,
 };
 
 const SECTORS = [
@@ -141,17 +162,24 @@ export function LabelBand() {
           items={SECTORS}
           speed={42}
           gap="1rem"
-          render={(item) => (
-            <span className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full bg-[#fbf9f4] px-5 py-2.5 text-base font-semibold tracking-[-0.01em] text-ink shadow-[0_0_0_1px_rgba(21,23,28,0.08),0_2px_6px_rgba(23,32,63,0.05)]">
-              {/* A square, not a circle — it reads as a mark rather than a
-                  bullet. */}
-              <span
-                aria-hidden="true"
-                className="h-[7px] w-[7px] rounded-[2px] bg-copper opacity-80"
-              />
-              {item}
-            </span>
-          )}
+          render={(item) => {
+            const Logo = SECTOR_LOGOS[item];
+            return (
+              <span className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full bg-[#fbf9f4] px-5 py-2.5 text-base font-semibold tracking-[-0.01em] text-ink shadow-[0_0_0_1px_rgba(21,23,28,0.08),0_2px_6px_rgba(23,32,63,0.05)]">
+                {Logo ? (
+                  <Logo size={18} color="default" />
+                ) : (
+                  // Fallback for any sector without a matched logo — a
+                  // square rather than a circle, so it reads as a mark.
+                  <span
+                    aria-hidden="true"
+                    className="h-[7px] w-[7px] rounded-[2px] bg-copper opacity-80"
+                  />
+                )}
+                {item}
+              </span>
+            );
+          }}
         />
 
         <div className="mt-4">
