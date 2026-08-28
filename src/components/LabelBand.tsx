@@ -6,11 +6,19 @@ import {
   SiWhatsapp,
   SiGoogleads,
   SiPostgresql,
+  SiClaude,
+  SiHubspot,
+  SiGooglemaps,
+  SiGoogleanalytics,
+  SiZapier,
+  SiGooglesheets,
 } from "@icons-pack/react-simple-icons";
 
-// Only for the entries that map to one real product with one real mark —
-// category labels like "CRM integrations" or "Scheduled reporting" don't
-// belong to a single brand, so they stay text-only rather than guessing.
+// Direct product matches get their own logo. The rest are category labels
+// with no single owner ("CRM integrations", "Scheduled reporting") — each
+// is paired with one well-known, instantly-recognizable product from that
+// space so the row reads visually instead of as plain text, without
+// claiming an exclusive partnership that doesn't exist.
 const TOOL_LOGOS: Record<string, ComponentType<{ size?: number; color?: string }>> = {
   "Next.js": SiNextdotjs,
   TypeScript: SiTypescript,
@@ -18,6 +26,12 @@ const TOOL_LOGOS: Record<string, ComponentType<{ size?: number; color?: string }
   "WhatsApp & SMS": SiWhatsapp,
   "Google Ads": SiGoogleads,
   Postgres: SiPostgresql,
+  "Language models": SiClaude,
+  "CRM integrations": SiHubspot,
+  "Google Business Profile": SiGooglemaps,
+  "Analytics & attribution": SiGoogleanalytics,
+  "Webhooks & APIs": SiZapier,
+  "Scheduled reporting": SiGooglesheets,
 };
 
 const SECTORS = [
