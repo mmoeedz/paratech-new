@@ -36,6 +36,7 @@ function Marquee({
   speed = 38,
   gap = "1rem",
   copies = 4,
+  reverse = false,
   render,
 }: {
   items: readonly string[];
@@ -43,6 +44,9 @@ function Marquee({
   speed?: number;
   gap?: string;
   copies?: number;
+  /** Runs the same loop backwards, so a row beneath another scrolls the
+   * opposite way instead of both drifting in lockstep. */
+  reverse?: boolean;
   render: (item: string) => ReactNode;
 }) {
   return (
@@ -55,6 +59,7 @@ function Marquee({
               "--speed": `${speed}s`,
               "--gap": gap,
               "--shift": `-${100 / copies}%`,
+              animationDirection: reverse ? "reverse" : "normal",
             } as CSSProperties
           }
         >
@@ -120,6 +125,7 @@ export function LabelBand() {
             items={TOOLS}
             speed={34}
             gap=".6rem"
+            reverse
             render={(item) => (
               <span className="inline-flex items-center whitespace-nowrap rounded-full border border-line-light px-3.5 py-1.5 text-[13px] font-medium text-ink-soft">
                 {item}
