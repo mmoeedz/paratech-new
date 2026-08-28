@@ -1,7 +1,10 @@
 /** Single source of truth for absolute URLs, metadata, and structured data. */
 export const SITE = {
   name: "Paratech",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://paratech.agency",
+  // `||`, not `??` — an env var that exists but is left blank in Vercel's
+  // dashboard is an empty string, not undefined, so `??` would let it
+  // through and crash `new URL("")` at build time.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://paratech.agency",
   email: "contact@paratechsolutions.com",
   tagline: "Design. Build. Grow. Automate.",
   description:
