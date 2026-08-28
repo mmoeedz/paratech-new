@@ -19,6 +19,21 @@ export const metadata: Metadata = {
 
 const FAQ = [
   {
+    question: "What does Paratech actually do?",
+    answer:
+      "We design and build websites and software, run growth marketing like SEO and paid ads, and automate business operations with AI — as one team, not four separate vendors.",
+  },
+  {
+    question: "What industries do you work with?",
+    answer:
+      "Ten sectors so far, from home and property services and real estate to healthcare, hospitality, retail, and enterprise support — each with its own playbook of pain points and fixes. See the full list on our Industries page.",
+  },
+  {
+    question: "Do I need all four services, or can I start with just one?",
+    answer:
+      "Just one. AI & Automation, Web & Software, Growth & Marketing, and Data & Analytics each stand on their own — you get the same team either way, and they're designed to work together if you use more than one.",
+  },
+  {
     question: "How quickly can you start?",
     answer:
       "Discovery usually begins within a week of scope being agreed. Smaller automation work can often start sooner.",
