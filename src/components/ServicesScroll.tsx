@@ -84,21 +84,19 @@ function CapabilityCard({ category, dark, animated = false }: CardProps) {
           <li
             key={service.title}
             {...step(3 + i)}
-            className={`${step(3 + i).className} group flex items-center gap-2.5 border-b py-2.5 ${
+            className={`${step(3 + i).className} flex items-center gap-2.5 border-b py-2.5 ${
               dark ? "border-line" : "border-line-light"
             }`}
           >
             <span
               aria-hidden="true"
-              className={`h-[5px] w-[5px] shrink-0 transition-transform duration-200 group-hover:scale-150 ${
+              className={`h-[5px] w-[5px] shrink-0 ${
                 dark ? "bg-copper" : "bg-copper-ink"
               }`}
             />
             <span
-              className={`text-[13px] font-medium transition-all duration-200 group-hover:translate-x-1 group-hover:scale-[1.05] ${
-                dark
-                  ? "text-cloud group-hover:text-copper"
-                  : "text-ink group-hover:text-copper-ink"
+              className={`text-[13px] font-medium ${
+                dark ? "text-cloud" : "text-ink"
               }`}
             >
               {service.title}
