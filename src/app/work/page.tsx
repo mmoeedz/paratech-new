@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CaseStudies } from "@/components/CaseStudies";
 import { CTA } from "@/components/CTA";
 
-const TITLE = "Work — Paratech";
+const TITLE = "Work | ParaTech";
 const DESCRIPTION =
   "Case studies across design, development, growth, and AI automation.";
 

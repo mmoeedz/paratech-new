@@ -24,9 +24,9 @@ export async function generateMetadata(
   const { slug } = await props.params;
   const category = getServiceCategory(slug);
 
-  if (!category) return { title: "Services — Paratech" };
+  if (!category) return { title: "Services | ParaTech" };
 
-  const title = `${category.title} — Paratech`;
+  const title = `${category.title} | ParaTech`;
 
   return {
     title,

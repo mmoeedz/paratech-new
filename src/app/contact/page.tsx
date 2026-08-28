@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Contact — Paratech";
+const TITLE = "Contact | ParaTech";
 const DESCRIPTION =
   "Tell us what you're trying to design, build, grow, or automate. We reply within one business day.";
 

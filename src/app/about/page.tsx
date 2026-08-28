@@ -3,7 +3,7 @@ import { About } from "@/components/About";
 import { WhyUs } from "@/components/WhyUs";
 import { CTA } from "@/components/CTA";
 
-const TITLE = "About — Paratech";
+const TITLE = "About | ParaTech";
 const DESCRIPTION =
   "A team built around design, engineering, growth, automation, and AI.";
 

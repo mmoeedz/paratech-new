@@ -7,7 +7,7 @@ import { CTA } from "@/components/CTA";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Insights — Paratech";
+const TITLE = "Insights | ParaTech";
 const DESCRIPTION =
   "Practical notes on AI automation, web performance, local search, and building digital systems that hold up in production.";
 
@@ -62,7 +62,7 @@ export default function InsightsPage() {
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "Paratech Insights",
+    name: "ParaTech Insights",
     url: `${SITE.url}/insights`,
     blogPost: NOTES.map((note) => ({
       "@type": "BlogPosting",

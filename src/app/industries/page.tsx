@@ -5,7 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { INDUSTRIES } from "@/data/industries";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Industries — Paratech";
+const TITLE = "Industries | ParaTech";
 const DESCRIPTION =
   "AI automation and calling agent services tailored to ten industries — from home services and real estate to enterprise support.";
 

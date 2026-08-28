@@ -24,9 +24,9 @@ export async function generateMetadata(
   const { slug } = await props.params;
   const industry = getIndustry(slug);
 
-  if (!industry) return { title: "Industries — Paratech" };
+  if (!industry) return { title: "Industries | ParaTech" };
 
-  const title = `${industry.title} — Paratech`;
+  const title = `${industry.title} | ParaTech`;
 
   return {
     title,

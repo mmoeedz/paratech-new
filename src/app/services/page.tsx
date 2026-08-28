@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { SERVICE_CATEGORIES } from "@/data/services";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Services — Paratech";
+const TITLE = "Services | ParaTech";
 const DESCRIPTION =
   "AI automation, web and custom software, growth marketing, and data analytics — four connected capabilities delivered by one team.";
 
