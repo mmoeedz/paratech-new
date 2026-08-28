@@ -7,12 +7,12 @@ import { ArrowRight } from "./ui/Icons";
 import { submitContactForm, type ContactState } from "@/app/contact/actions";
 
 const fieldClass =
-  "w-full rounded-lg border border-line bg-obsidian/60 px-4 py-3 text-base text-cloud placeholder:text-cloud-faint transition-colors focus:border-copper focus:outline-none sm:text-sm";
+  "w-full rounded-lg border border-line-light bg-white px-4 py-3 text-base text-ink placeholder:text-ink-faint transition-colors focus:border-copper-ink focus:outline-none sm:text-sm";
 
 const labelClass =
-  "block font-mono text-[10px] uppercase tracking-[0.16em] text-cloud-faint";
+  "block font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint";
 
-const errorClass = "mt-1.5 text-xs text-red-400";
+const errorClass = "mt-1.5 text-xs text-red-600";
 
 const initialState: ContactState = { status: "idle" };
 
@@ -82,7 +82,7 @@ export function ContactForm({
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
-            Name <span className="text-copper">*</span>
+            Name <span className="text-copper-ink">*</span>
           </label>
           <input
             id="name"
@@ -114,7 +114,7 @@ export function ContactForm({
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email <span className="text-copper">*</span>
+            Email <span className="text-copper-ink">*</span>
           </label>
           <input
             id="email"
@@ -183,7 +183,7 @@ export function ContactForm({
       <div>
         <label htmlFor="message" className={labelClass}>
           What are you trying to improve?{" "}
-          <span className="text-copper">*</span>
+          <span className="text-copper-ink">*</span>
         </label>
         <textarea
           id="message"
@@ -209,7 +209,7 @@ export function ContactForm({
         <p
           aria-live="polite"
           className={`text-xs ${
-            state.status === "error" ? "text-red-400" : "text-cloud-faint"
+            state.status === "error" ? "text-red-600" : "text-ink-faint"
           }`}
         >
           {state.status === "success"

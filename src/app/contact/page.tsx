@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
-import { Eyebrow } from "@/components/ui/Section";
+import { Section, Eyebrow } from "@/components/ui/Section";
 import { ContactForm } from "@/components/ContactForm";
 import { SITE } from "@/lib/site";
 
@@ -37,56 +37,51 @@ export default async function ContactPage(props: PageProps<"/contact">) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-obsidian pt-36 pb-24 sm:pt-44 lg:pt-52 lg:pb-32">
-        <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
-        <div className="pointer-events-none absolute inset-0 bg-radial-copper" />
+      <Section tone="light" isPageTop>
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <div>
+            <Eyebrow tone="light">Contact</Eyebrow>
+            <h1 className="mt-5 text-balance font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-ink sm:text-5xl">
+              Let&apos;s automate something real.
+            </h1>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
+              Tell us what you&apos;re trying to improve. We&apos;ll tell you
+              whether we can help, what it would take, and what it would cost
+              — before you commit to anything.
+            </p>
 
-        <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-            <div>
-              <Eyebrow>Contact</Eyebrow>
-              <h1 className="mt-5 text-balance font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-cloud sm:text-5xl">
-                Let&apos;s automate something real.
-              </h1>
-              <p className="mt-6 max-w-md text-lg leading-relaxed text-cloud-soft">
-                Tell us what you&apos;re trying to improve. We&apos;ll tell you
-                whether we can help, what it would take, and what it would cost
-                — before you commit to anything.
-              </p>
-
-              <div className="mt-10 flex flex-col gap-6 border-t border-line pt-8">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-cloud-faint">
-                    Email
-                  </p>
-                  <a
-                    href={`mailto:${SITE.email}`}
-                    className="mt-2 inline-block text-base font-medium text-copper transition-colors hover:text-cloud"
-                  >
-                    {SITE.email}
-                  </a>
-                </div>
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-cloud-faint">
-                    Response time
-                  </p>
-                  <p className="mt-2 text-base text-cloud">
-                    Within one business day
-                  </p>
-                </div>
+            <div className="mt-10 flex flex-col gap-6 border-t border-line-light pt-8">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+                  Email
+                </p>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="mt-2 inline-block text-base font-medium text-copper-ink transition-colors hover:text-ink"
+                >
+                  {SITE.email}
+                </a>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+                  Response time
+                </p>
+                <p className="mt-2 text-base text-ink">
+                  Within one business day
+                </p>
               </div>
             </div>
-
-            <Reveal delay={0.08}>
-              <div className="rounded-xl border border-line bg-deep/60 p-7 lg:p-9">
-                <ContactForm defaultService={defaultService} />
-              </div>
-            </Reveal>
           </div>
-        </div>
-      </section>
 
-      <section className="bg-ivory py-20 sm:py-24">
+          <Reveal delay={0.08}>
+            <div className="rounded-xl border border-line-light bg-bone p-7 lg:p-9">
+              <ContactForm defaultService={defaultService} />
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      <section className="border-t border-line-light bg-ivory py-20 sm:py-24">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <h2 className="text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
             Before you write

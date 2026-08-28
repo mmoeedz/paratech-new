@@ -167,7 +167,7 @@ export function DropdownMenu({
         <div className={`absolute top-full z-50 pt-3 ${panelClassName}`}>
           <div
             id={panelId}
-            className="animate-menu-in overflow-hidden rounded-xl border border-line-light bg-ivory shadow-2xl shadow-black/50"
+            className="animate-menu-in overflow-hidden border border-line-light bg-ivory shadow-2xl shadow-black/50"
           >
             {children(close)}
           </div>

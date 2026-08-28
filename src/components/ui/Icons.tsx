@@ -199,6 +199,58 @@ export function CheckCircleIcon({ className = "h-6 w-6" }: IconProps) {
   );
 }
 
+export function InstagramIcon({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+    >
+      <rect
+        x="3.5"
+        y="3.5"
+        width="17"
+        height="17"
+        rx="5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17.1" cy="6.9" r="1.1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function LinkedInIcon({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+    >
+      <rect
+        x="3.5"
+        y="3.5"
+        width="17"
+        height="17"
+        rx="3"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <circle cx="7.6" cy="8.5" r="1.05" fill="currentColor" />
+      <path
+        d="M7.6 10.9v5.6M11.6 16.5v-5.6M11.6 12.7c0-1.3.9-2.2 2.1-2.2s2 .9 2 2.2v3.8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /** Small 2x2 mark used as a quiet brand motif on cards. */
 export function GridMark({
   className = "",

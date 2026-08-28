@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { SERVICE_CATEGORIES } from "@/data/services";
+import { INDUSTRIES } from "@/data/industries";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     { path: "", priority: 1 },
     { path: "/services", priority: 0.9 },
+    { path: "/industries", priority: 0.9 },
     { path: "/work", priority: 0.8 },
     { path: "/about", priority: 0.6 },
     { path: "/contact", priority: 0.7 },
@@ -24,6 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...SERVICE_CATEGORIES.map((category) => ({
       url: `${SITE.url}/services/${category.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    })),
+    ...INDUSTRIES.map((industry) => ({
+      url: `${SITE.url}/industries/${industry.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.85,
     })),
