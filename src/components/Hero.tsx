@@ -89,10 +89,10 @@ export function Hero() {
                 Start a project
               </Link>
               <Link
-                href="/work"
+                href="/services"
                 className="group inline-flex items-center justify-center gap-2 rounded-lg border border-copper/45 px-8 py-3.5 text-[15px] font-bold text-copper transition-colors hover:border-copper hover:bg-copper/[0.07]"
               >
-                See our work
+                Our Services
                 <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </motion.div>
