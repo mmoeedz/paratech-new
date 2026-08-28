@@ -15,7 +15,7 @@ export function Industries() {
         lead="Ten sectors, each with its own pain points — and the specific AI automation and calling agent services that solve them."
       />
 
-      <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line-light bg-line-light sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line-light bg-line-light sm:mt-20 sm:grid-cols-2">
         {INDUSTRIES.map((industry, i) => (
           <Reveal key={industry.slug} delay={i * 0.04}>
             <Link
