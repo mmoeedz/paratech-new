@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/Reveal";
@@ -91,6 +92,15 @@ export default async function IndustryPage(
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-obsidian pt-36 pb-20 sm:pt-44 lg:pt-52 lg:pb-24">
+        <Image
+          src={`/industries/${industry.slug}.jpg`}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-40"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/85 to-obsidian/60" />
         <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
         <div className="pointer-events-none absolute inset-0 bg-radial-copper" />
 
