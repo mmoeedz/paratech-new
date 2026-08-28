@@ -21,6 +21,10 @@
 /.next/
 /out/
 
+# self-hosted deployment bundle (generated via `next build` + manual assembly,
+# not source — see paratech-host/README.md to regenerate)
+/paratech-host/
+
 # production
 /build
 

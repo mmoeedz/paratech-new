@@ -1,45 +1,40 @@
+import Image from "next/image";
+
 /**
- * Brand lockup: PT monogram | PARATECH.
+ * Brand lockup: PT mark | PARATECH.
  *
- * The monogram is inline SVG (no network request, sharp at any size). The "P"
- * is drawn with `fill-current` so it inherits the surrounding text colour —
- * charcoal on light surfaces, cloud on the dark header/footer — while the "T"
- * always carries the copper accent.
+ * The mark ships as two pre-rendered PNGs (public/brand/) rather than inline
+ * SVG — it's an illustrated ribbon-fold treatment with gradients and shading
+ * that can't be reduced to flat vector fills. Because it can no longer
+ * recolor itself via `fill-current`, the two variants stand in for light vs.
+ * dark surfaces: pick "white" wherever the mark sits on a dark surface
+ * (nav, footer), "black" wherever it sits on a light one.
  */
-function PTMark({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 200 190"
-      aria-hidden="true"
-      focusable="false"
-      className={className}
-    >
-      {/* P — top bar with a 45° cut, bowl, and the tail below it */}
-      <path
-        className="fill-current"
-        d="M13 0 L150 0 C179 0 200 22 200 50 C200 78 179 100 150 100 L128 100 C114 104 107 114 104 128 C111 108 127 85 148 76 C163 71 172 62 172 50 C172 38 163 29 148 26 L38 26 Z"
-      />
-      {/* T — slanted bar with the stem dropping from its right end */}
-      <path
-        className="fill-copper"
-        d="M0 37 L136 37 L100 64 L100 155 L70 185 L70 64 L26 64 Z"
-      />
-    </svg>
-  );
-}
+const MARK = {
+  white: { src: "/brand/paratech-mark-white.png", width: 722, height: 760 },
+  black: { src: "/brand/paratech-mark-black.png", width: 657, height: 760 },
+} as const;
 
 export function Logo({
   className = "",
   size = "md",
+  dark = true,
 }: {
   className?: string;
   size?: "md" | "lg";
+  /** Which mark variant to use — true (default) for dark surfaces, false for light ones. */
+  dark?: boolean;
 }) {
   const isLarge = size === "lg";
+  const mark = dark ? MARK.white : MARK.black;
 
   return (
     <span className={`flex items-center ${className}`}>
-      <PTMark
+      <Image
+        src={mark.src}
+        width={mark.width}
+        height={mark.height}
+        alt=""
         className={
           isLarge
             ? "h-20 w-auto shrink-0 sm:h-24"

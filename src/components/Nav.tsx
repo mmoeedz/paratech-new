@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ServicesMenu } from "./ServicesMenu";
+import { IndustriesMenu } from "./IndustriesMenu";
 import { ArrowRight, PlusMinus } from "./ui/Icons";
 import { Logo } from "./ui/Logo";
 import { SERVICE_CATEGORIES } from "@/data/services";
+import { INDUSTRIES } from "@/data/industries";
 
 const LINKS = [
   { label: "Work", href: "/work" },
@@ -14,7 +16,7 @@ const LINKS = [
   { label: "Insights", href: "/insights" },
 ];
 
-type MobileSection = "services";
+type MobileSection = "services" | "industries";
 
 /** Visible, non-disabled elements a keyboard user can tab to, in DOM order. */
 function getFocusable(container: HTMLElement): HTMLElement[] {
@@ -128,6 +130,7 @@ export function Nav() {
 
         <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
           <ServicesMenu />
+          <IndustriesMenu />
           {LINKS.map((link) => (
             <Link
               key={link.href}
@@ -249,6 +252,58 @@ export function Nav() {
                       className="group flex items-center gap-2 py-3.5 pl-1 text-[15px] font-medium text-copper transition-colors active:text-copper-light"
                     >
                       All services
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="border-b border-line/70">
+              <button
+                type="button"
+                onClick={() => toggleSection("industries")}
+                aria-expanded={openSection === "industries"}
+                aria-controls="mobile-industries-panel"
+                className="flex w-full items-center justify-between py-4 text-left active:opacity-70"
+              >
+                <span className="text-base font-medium text-cloud">
+                  Industries
+                </span>
+                <PlusMinus
+                  open={openSection === "industries"}
+                  className="h-3.5 w-3.5 text-cloud-faint"
+                />
+              </button>
+              <div
+                id="mobile-industries-panel"
+                className="grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
+                style={{
+                  gridTemplateRows: openSection === "industries" ? "1fr" : "0fr",
+                }}
+              >
+                <ul className="overflow-hidden divide-y divide-line/70 pb-1">
+                  {INDUSTRIES.map((industry) => (
+                    <li key={industry.slug}>
+                      <Link
+                        href={`/industries/${industry.slug}`}
+                        onClick={closeMenu}
+                        className="flex items-baseline gap-3 py-3.5 pl-1 text-[15px] text-cloud-soft transition-colors active:text-cloud"
+                      >
+                        <span className="font-mono text-[10px] text-copper">
+                          {industry.number}
+                        </span>
+                        {industry.title}
+                      </Link>
+                    </li>
+                  ))}
+                  <li>
+                    <Link
+                      href="/industries"
+                      onClick={closeMenu}
+                      className="group flex items-center gap-2 py-3.5 pl-1 text-[15px] font-medium text-copper transition-colors active:text-copper-light"
+                    >
+                      All industries
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </Link>
                   </li>
