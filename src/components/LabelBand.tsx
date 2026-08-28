@@ -1,4 +1,24 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ComponentType, CSSProperties, ReactNode } from "react";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiPython,
+  SiWhatsapp,
+  SiGoogleads,
+  SiPostgresql,
+} from "@icons-pack/react-simple-icons";
+
+// Only for the entries that map to one real product with one real mark —
+// category labels like "CRM integrations" or "Scheduled reporting" don't
+// belong to a single brand, so they stay text-only rather than guessing.
+const TOOL_LOGOS: Record<string, ComponentType<{ size?: number; color?: string }>> = {
+  "Next.js": SiNextdotjs,
+  TypeScript: SiTypescript,
+  Python: SiPython,
+  "WhatsApp & SMS": SiWhatsapp,
+  "Google Ads": SiGoogleads,
+  Postgres: SiPostgresql,
+};
 
 const SECTORS = [
   "Home & field services",
@@ -126,11 +146,15 @@ export function LabelBand() {
             speed={34}
             gap=".6rem"
             reverse
-            render={(item) => (
-              <span className="inline-flex items-center whitespace-nowrap rounded-full border border-line-light px-3.5 py-1.5 text-[13px] font-medium text-ink-soft">
-                {item}
-              </span>
-            )}
+            render={(item) => {
+              const Logo = TOOL_LOGOS[item];
+              return (
+                <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line-light px-3.5 py-1.5 text-[13px] font-medium text-ink-soft">
+                  {Logo && <Logo size={14} color="default" />}
+                  {item}
+                </span>
+              );
+            }}
           />
         </div>
       </div>
