@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 // Placeholder social links ("#") are left out rather than published as
 // broken/misleading sameAs entries — this list fills in on its own once
 // SITE.social carries real URLs.
-const sameAs = Object.values(SITE.social).filter((url) => url !== "#");
+const sameAs = Object.values(SITE.social).filter((url) => !url.startsWith("#"));
 
 const organizationSchema = {
   "@context": "https://schema.org",

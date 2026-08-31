@@ -9,9 +9,8 @@ export const SITE = {
   tagline: "AI & Digital Solutions",
   description:
     "Paratech is a digital growth, technology, and AI automation partner. We design digital experiences, build software, drive growth, and automate business operations with AI.",
-  // TODO: swap in the real profile URLs once they exist.
   social: {
-    instagram: "#",
-    linkedin: "#",
+    instagram: "https://www.instagram.com/paratech.sol/",
+    linkedin: "https://www.linkedin.com/company/paratechsolutions",
   },
 } as const;
