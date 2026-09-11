@@ -15,8 +15,19 @@ export const SITE = {
   },
   // Names people actually search for us by (Search Console top queries),
   // used as schema.org alternateName so Google maps the variants to this
-  // one entity instead of treating them as unrelated brands.
-  alternateNames: ["ParaTech Solutions", "Para Tech", "ParaTech Software Solutions"],
+  // one entity instead of treating them as unrelated brands. Limited to
+  // real name/spelling variants of *us* — deliberately excludes "Arpatech"
+  // (a different, unrelated company — claiming it would misrepresent
+  // someone else's brand as ours) and "ParaTech Ltd/LLC" (not our actual
+  // legal entity name, so not something structured data should assert).
+  alternateNames: [
+    "ParaTech Solutions",
+    "Para Tech",
+    "ParaTech Software Solutions",
+    "ParraTech",
+    "ParaTechs",
+    "PraTech",
+  ],
   // Search-intent terms for the `keywords` meta tag — ignored by Google's
   // ranking but still read by Bing and some directories, so worth the
   // one-line cost.
@@ -24,6 +35,7 @@ export const SITE = {
     "ParaTech",
     "ParaTech Solutions",
     "ParaTech Software Solutions",
+    "Para Tech",
     "AI automation agency",
     "digital growth partner",
     "custom software development",
