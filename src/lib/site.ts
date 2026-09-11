@@ -13,4 +13,20 @@ export const SITE = {
     instagram: "https://www.instagram.com/paratech.sol/",
     linkedin: "https://www.linkedin.com/company/paratechsolutions",
   },
+  // Names people actually search for us by (Search Console top queries),
+  // used as schema.org alternateName so Google maps the variants to this
+  // one entity instead of treating them as unrelated brands.
+  alternateNames: ["ParaTech Solutions", "Para Tech", "ParaTech Software Solutions"],
+  // Search-intent terms for the `keywords` meta tag — ignored by Google's
+  // ranking but still read by Bing and some directories, so worth the
+  // one-line cost.
+  keywords: [
+    "ParaTech",
+    "ParaTech Solutions",
+    "ParaTech Software Solutions",
+    "AI automation agency",
+    "digital growth partner",
+    "custom software development",
+    "AI & digital solutions",
+  ],
 } as const;

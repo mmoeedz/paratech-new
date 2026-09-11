@@ -34,6 +34,7 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
+  keywords: [...SITE.keywords],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -62,6 +63,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: SITE.name,
+  alternateName: [...SITE.alternateNames],
   url: SITE.url,
   logo: `${SITE.url}/icon.png`,
   email: SITE.email,
