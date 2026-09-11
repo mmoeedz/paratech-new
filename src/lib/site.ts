@@ -4,7 +4,7 @@ export const SITE = {
   // `||`, not `??` — an env var that exists but is left blank in Vercel's
   // dashboard is an empty string, not undefined, so `??` would let it
   // through and crash `new URL("")` at build time.
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://paratech.agency",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://paratechsolutions.com",
   email: "contact@paratechsolutions.com",
   tagline: "AI & Digital Solutions",
   description:
