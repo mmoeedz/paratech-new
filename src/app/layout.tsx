@@ -26,10 +26,17 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+// Homepage-only title — every other page sets its own full title directly
+// (the `%s` template below is an identity, not a suffix), so this string
+// only ever surfaces on "/". Uses the full legal-style name, matching
+// og:site_name and the WebSite schema below, to give Google a consistent
+// brand signal instead of the bare domain in the search snippet.
+const HOME_TITLE = `${SITE.legalName} | Digital Growth & AI`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} | ${SITE.tagline}`,
+    default: HOME_TITLE,
     template: `%s`,
   },
   description: SITE.description,
@@ -38,14 +45,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: SITE.name,
+    siteName: SITE.legalName,
     url: SITE.url,
-    title: `${SITE.name} | ${SITE.tagline}`,
+    title: HOME_TITLE,
     description: SITE.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} | ${SITE.tagline}`,
+    title: HOME_TITLE,
     description: SITE.description,
   },
   robots: {
@@ -83,7 +90,10 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: SITE.name,
+  // Full legal-style name at the WebSite level, matching og:site_name —
+  // the ProfessionalService entity below (and its `publisher` reference
+  // here) intentionally keeps the short "ParaTech" brand name.
+  name: SITE.legalName,
   url: SITE.url,
   description: SITE.description,
   publisher: { "@type": "ProfessionalService", name: SITE.name },

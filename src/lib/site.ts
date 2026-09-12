@@ -1,6 +1,11 @@
 /** Single source of truth for absolute URLs, metadata, and structured data. */
 export const SITE = {
   name: "ParaTech",
+  // Full registered entity name. Used only where a formal/legal-style name
+  // is appropriate (og:site_name, the WebSite schema's "name") — everyday
+  // copy, the ProfessionalService schema, and per-page titles all keep the
+  // short "ParaTech" brand name via `name` above.
+  legalName: "Paratech Solutions Ltd",
   // `||`, not `??` — an env var that exists but is left blank in Vercel's
   // dashboard is an empty string, not undefined, so `??` would let it
   // through and crash `new URL("")` at build time.
