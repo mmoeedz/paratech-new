@@ -4,7 +4,10 @@ export const SITE = {
   // `||`, not `??` — an env var that exists but is left blank in Vercel's
   // dashboard is an empty string, not undefined, so `??` would let it
   // through and crash `new URL("")` at build time.
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://paratechsolutions.com",
+  // The bare apex 308-redirects to www (confirmed via `curl -IL`), so www is
+  // the URL that actually serves content — that's what canonical/OG/JSON-LD
+  // should point at, not the redirecting apex.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.paratechsolutions.com",
   email: "contact@paratechsolutions.com",
   tagline: "AI & Digital Solutions",
   description:

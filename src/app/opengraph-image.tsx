@@ -78,7 +78,7 @@ export default function OpengraphImage() {
             color: "#8a847b",
           }}
         >
-          paratechsolutions.com
+          www.paratechsolutions.com
         </div>
       </div>
     ),
