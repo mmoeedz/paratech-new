@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  --color-obsidian: #0b0a09;
+  --color-deep: #14120f;
+  --color-elevated: #1c1916;
+  --color-hover: #24201c;
+  --color-line: #2a2521;
+  --color-line-strong: #3a342e;
+  --color-copper: #c08040;
+  --color-copper-light: #d19a5f;
+  --color-cloud: #f4f1ea;
+  --color-soft: #b5afa6;
+  --color-faint: #8a847b;
+  --color-ok: #5fb98a;
+  --color-warn: #e0a64a;
+  --color-bad: #e5736b;
+  --color-info: #6aa9d8;
+}
+
+@theme inline {
+  --color-obsidian: var(--color-obsidian);
+  --color-deep: var(--color-deep);
+  --color-elevated: var(--color-elevated);
+  --color-hover: var(--color-hover);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-copper: var(--color-copper);
+  --color-copper-light: var(--color-copper-light);
+  --color-cloud: var(--color-cloud);
+  --color-soft: var(--color-soft);
+  --color-faint: var(--color-faint);
+  --color-ok: var(--color-ok);
+  --color-warn: var(--color-warn);
+  --color-bad: var(--color-bad);
+  --color-info: var(--color-info);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html { background: var(--color-obsidian); color-scheme: dark; }
+body {
+  background: var(--color-obsidian);
+  color: var(--color-cloud);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--color-copper); color: var(--color-obsidian); }
+:focus-visible { outline: 2px solid var(--color-copper); outline-offset: 2px; }
+
+@layer components {
+  .card { @apply rounded-xl border border-line bg-deep; }
+  .card-pad { @apply p-5; }
+  .h1 { @apply text-xl font-semibold tracking-tight text-cloud; }
+  .h2 { @apply text-sm font-semibold uppercase tracking-wider text-soft; }
+  .muted { @apply text-sm text-soft; }
+  .faint { @apply text-xs text-faint; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line-strong bg-elevated px-3.5 py-2
+      text-sm font-medium text-cloud transition-colors hover:bg-hover disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary { @apply border-copper bg-copper text-obsidian hover:bg-copper-light hover:border-copper-light; }
+  .btn-danger { @apply border-bad/40 bg-bad/10 text-bad hover:bg-bad/20; }
+  .btn-ghost { @apply border-transparent bg-transparent hover:bg-hover; }
+  .btn-sm { @apply px-2.5 py-1 text-xs; }
+
+  .input, .select, .textarea {
+    @apply w-full rounded-lg border border-line-strong bg-elevated px-3 py-2 text-sm text-cloud placeholder:text-faint
+      focus:border-copper focus:outline-none;
+  }
+  .textarea { @apply min-h-24 leading-relaxed; }
+  .lbl { @apply mb-1 block text-xs font-medium uppercase tracking-wide text-soft; }
+
+  .tbl { @apply w-full text-left text-sm; }
+  .tbl th { @apply border-b border-line px-3 py-2 text-xs font-medium uppercase tracking-wide text-faint; }
+  .tbl td { @apply border-b border-line/60 px-3 py-2.5 align-middle; }
+  .tbl tbody tr:hover { @apply bg-elevated/60; }
+
+  .badge { @apply inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium; }
+  .badge-slate { @apply border-line-strong bg-elevated text-soft; }
+  .badge-ok { @apply border-ok/30 bg-ok/10 text-ok; }
+  .badge-warn { @apply border-warn/30 bg-warn/10 text-warn; }
+  .badge-bad { @apply border-bad/30 bg-bad/10 text-bad; }
+  .badge-info { @apply border-info/30 bg-info/10 text-info; }
+  .badge-copper { @apply border-copper/40 bg-copper/10 text-copper-light; }
+}
