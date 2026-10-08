@@ -5,7 +5,7 @@ export const SITE = {
   // is appropriate (og:site_name, the WebSite schema's "name") — everyday
   // copy, the ProfessionalService schema, and per-page titles all keep the
   // short "ParaTech" brand name via `name` above.
-  legalName: "Paratech Solutions Ltd",
+  legalName: "Paratech Solutions LLC",
   // `||`, not `??` — an env var that exists but is left blank in Vercel's
   // dashboard is an empty string, not undefined, so `??` would let it
   // through and crash `new URL("")` at build time.
