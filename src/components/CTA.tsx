@@ -29,7 +29,6 @@ export function CTA({
       ref={sectionRef}
       className="relative overflow-hidden bg-obsidian py-24 sm:py-28 lg:py-36"
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
       {reduceMotion ? (
         <div className="pointer-events-none absolute inset-0 bg-radial-copper" />
       ) : (

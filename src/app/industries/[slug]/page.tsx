@@ -101,7 +101,6 @@ export default async function IndustryPage(
           className="object-cover opacity-40"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/85 to-obsidian/60" />
-        <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
         <div className="pointer-events-none absolute inset-0 bg-radial-copper" />
 
         <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
@@ -167,7 +166,6 @@ export default async function IndustryPage(
 
       {/* Services */}
       <Section tone="dark">
-        <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
         <SectionHeading
           eyebrow="What we build for you"
           title={`Every ${industry.title} engagement can include.`}

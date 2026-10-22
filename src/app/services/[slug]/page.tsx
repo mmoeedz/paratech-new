@@ -89,7 +89,6 @@ export default async function ServiceCategoryPage(
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-obsidian pt-36 pb-20 sm:pt-44 lg:pt-52 lg:pb-24">
-        <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
         <div className="pointer-events-none absolute inset-0 bg-radial-copper" />
 
         <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
