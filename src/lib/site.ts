@@ -14,6 +14,10 @@ export const SITE = {
   // should point at, not the redirecting apex.
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.paratechsolutions.com",
   email: "contact@paratechsolutions.com",
+  // Display form for copy; `phoneHref` is the E.164 form for tel: links and
+  // schema.org's `telephone`.
+  phone: "(307) 247-8135",
+  phoneHref: "+13072478135",
   tagline: "AI & Digital Solutions",
   description:
     "Paratech is a digital growth, technology, and AI automation partner. We design digital experiences, build software, drive growth, and automate business operations with AI.",

@@ -97,6 +97,17 @@ export default async function ContactPage(props: PageProps<"/contact">) {
               </div>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+                  Phone
+                </p>
+                <a
+                  href={`tel:${SITE.phoneHref}`}
+                  className="mt-2 inline-block text-base font-medium text-copper-ink transition-colors hover:text-ink"
+                >
+                  {SITE.phone}
+                </a>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
                   Response time
                 </p>
                 <p className="mt-2 text-base text-ink">

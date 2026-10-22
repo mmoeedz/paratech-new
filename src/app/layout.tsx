@@ -74,6 +74,7 @@ const organizationSchema = {
   url: SITE.url,
   logo: `${SITE.url}/icon.png`,
   email: SITE.email,
+  telephone: SITE.phoneHref,
   description: SITE.description,
   areaServed: "Worldwide",
   serviceType: [

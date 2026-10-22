@@ -26,7 +26,6 @@ const ARCHITECTURE = [
 export function AIAgents() {
   return (
     <Section tone="dark" className="bg-deep!">
-      <div className="pointer-events-none absolute inset-0 bg-grid-dark opacity-60" />
 
       <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div>

@@ -46,7 +46,6 @@ export function Hero() {
       ref={sectionRef}
       className="relative overflow-hidden bg-obsidian pt-36 pb-20 sm:pt-44 lg:pt-52 lg:pb-28"
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
       {reduceMotion ? (
         <div className="pointer-events-none absolute inset-0 bg-radial-copper" />
       ) : (

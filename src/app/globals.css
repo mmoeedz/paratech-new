@@ -167,39 +167,12 @@ body {
   color: transparent;
 }
 
-/* Fine grid texture for dark sections */
-.bg-grid-dark {
-  background-image:
-    linear-gradient(to right, rgba(244, 241, 234, 0.028) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(244, 241, 234, 0.028) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(80% 60% at 50% 30%, #000 0%, transparent 100%);
-}
-
 .bg-radial-copper {
   background: radial-gradient(
     55% 45% at 50% 0%,
     rgba(192, 128, 64, 0.14) 0%,
     rgba(192, 128, 64, 0) 72%
   );
-}
-
-/* Blueprint grid: fine cells with a heavier line every fourth, pooled by a
-   radial mask. Denser and warmer than .bg-grid-dark, which stays the default
-   texture for dark sections. */
-.bg-blueprint {
-  --cell: 34px;
-  background-image:
-    linear-gradient(to right, rgba(209, 154, 95, 0.12) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(209, 154, 95, 0.12) 1px, transparent 1px),
-    linear-gradient(to right, rgba(209, 154, 95, 0.18) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(209, 154, 95, 0.18) 1px, transparent 1px);
-  background-size:
-    var(--cell) var(--cell),
-    var(--cell) var(--cell),
-    calc(var(--cell) * 4) calc(var(--cell) * 4),
-    calc(var(--cell) * 4) calc(var(--cell) * 4);
-  mask-image: radial-gradient(70% 60% at 50% 35%, #000, transparent 100%);
 }
 
 /* Two off-centre copper blooms, so the ground behind the grid isn't flat. */

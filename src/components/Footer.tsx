@@ -49,6 +49,12 @@ export function Footer() {
             >
               {SITE.email}
             </a>
+            <a
+              href={`tel:${SITE.phoneHref}`}
+              className="mt-2 block text-sm font-medium text-cloud-soft transition-colors hover:text-copper"
+            >
+              {SITE.phone}
+            </a>
 
             <div className="mt-6 flex items-center gap-4">
               {SOCIAL.map(({ label, href, Icon }) => (
