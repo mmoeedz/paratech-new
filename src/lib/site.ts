@@ -18,6 +18,13 @@ export const SITE = {
   // schema.org's `telephone`.
   phone: "(307) 247-8135",
   phoneHref: "+13072478135",
+  // City-level only — no street address is published.
+  address: {
+    locality: "Casper",
+    region: "WY",
+    country: "US",
+    display: "Casper, Wyoming",
+  },
   tagline: "AI & Digital Solutions",
   description:
     "Paratech is a digital growth, technology, and AI automation partner. We design digital experiences, build software, drive growth, and automate business operations with AI.",

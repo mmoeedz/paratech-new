@@ -108,6 +108,14 @@ export default async function ContactPage(props: PageProps<"/contact">) {
               </div>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+                  Location
+                </p>
+                <p className="mt-2 text-base text-ink">
+                  {SITE.address.display}
+                </p>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
                   Response time
                 </p>
                 <p className="mt-2 text-base text-ink">

@@ -55,6 +55,9 @@ export function Footer() {
             >
               {SITE.phone}
             </a>
+            <p className="mt-2 text-sm text-cloud-soft">
+              {SITE.address.display}
+            </p>
 
             <div className="mt-6 flex items-center gap-4">
               {SOCIAL.map(({ label, href, Icon }) => (
