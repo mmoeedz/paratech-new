@@ -9,6 +9,7 @@ import { ArrowRight, PlusMinus } from "./ui/Icons";
 import { Logo } from "./ui/Logo";
 import { SERVICE_CATEGORIES } from "@/data/services";
 import { INDUSTRIES } from "@/data/industries";
+import { SITE } from "@/lib/site";
 
 const LINKS = [
   { label: "Work", href: "/work" },
@@ -331,6 +332,12 @@ export function Nav() {
               Start a project
               <ArrowRight className="h-4 w-4" />
             </Link>
+            <a
+              href={`tel:${SITE.phoneHref}`}
+              className="mt-4 text-center text-sm font-medium text-cloud-soft transition-colors active:text-copper"
+            >
+              Or call {SITE.phone}
+            </a>
           </nav>
         </div>
       )}
