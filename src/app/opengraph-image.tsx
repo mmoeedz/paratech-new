@@ -1,10 +1,17 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "Paratech — Design. Build. Grow. Automate.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const mark = await readFile(
+    path.join(process.cwd(), "public/brand/paratech-mark-white.png")
+  );
+  const markSrc = `data:image/png;base64,${mark.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -18,27 +25,18 @@ export default function OpengraphImage() {
           padding: "72px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={markSrc} width={56} height={59} alt="" />
           <div
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: 26,
-              gap: 4,
+              fontSize: 34,
+              color: "#f4f1ea",
+              fontWeight: 600,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
             }}
           >
-            <div style={{ width: 11, height: 11, background: "#c08040" }} />
-            <div
-              style={{ width: 11, height: 11, background: "rgba(244,241,234,0.3)" }}
-            />
-            <div
-              style={{ width: 11, height: 11, background: "rgba(244,241,234,0.3)" }}
-            />
-            <div
-              style={{ width: 11, height: 11, background: "rgba(244,241,234,0.3)" }}
-            />
-          </div>
-          <div style={{ fontSize: 34, color: "#f4f1ea", fontWeight: 600 }}>
             Paratech
           </div>
         </div>
