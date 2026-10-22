@@ -35,7 +35,7 @@ export default function Error({
           <button
             type="button"
             onClick={reset}
-            className="group inline-flex items-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-medium text-obsidian transition-colors hover:bg-copper-light"
+            className="group inline-flex items-center gap-2 rounded-full bg-grad-copper px-6 py-3 text-sm font-medium text-ivory shadow-[0_10px_30px_-10px_rgba(138,80,36,0.6)] transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(138,80,36,0.85)]"
           >
             Try again
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

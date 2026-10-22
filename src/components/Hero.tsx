@@ -83,7 +83,7 @@ export function Hero() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-b from-copper-light to-copper px-8 py-3.5 text-[15px] font-bold text-obsidian shadow-[0_10px_30px_-10px_rgba(192,128,64,0.75)] transition-all hover:from-copper hover:to-copper-ink hover:shadow-[0_12px_34px_-10px_rgba(192,128,64,0.9)]"
+                className="inline-flex items-center justify-center rounded-lg bg-grad-copper px-8 py-3.5 text-[15px] font-bold text-ivory shadow-[0_10px_30px_-10px_rgba(138,80,36,0.6)] transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(138,80,36,0.85)]"
               >
                 Start a project
               </Link>
