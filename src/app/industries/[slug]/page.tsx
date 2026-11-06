@@ -101,7 +101,6 @@ export default async function IndustryPage(
           className="object-cover opacity-40"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/85 to-obsidian/60" />
-        <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
         <div className="pointer-events-none absolute inset-0 bg-radial-copper" />
 
         <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
@@ -132,7 +131,7 @@ export default async function IndustryPage(
             </p>
             <Link
               href={`/contact?service=${encodeURIComponent(industry.title)}`}
-              className="group mt-9 inline-flex items-center gap-2 rounded-full bg-copper px-6 py-3 text-sm font-medium text-obsidian transition-colors hover:bg-copper-light"
+              className="group mt-9 inline-flex items-center gap-2 rounded-full bg-grad-copper px-6 py-3 text-sm font-medium text-ivory shadow-[0_10px_30px_-10px_rgba(138,80,36,0.6)] transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(138,80,36,0.85)]"
             >
               Get an automation assessment
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -167,7 +166,6 @@ export default async function IndustryPage(
 
       {/* Services */}
       <Section tone="dark">
-        <div className="pointer-events-none absolute inset-0 bg-grid-dark" />
         <SectionHeading
           eyebrow="What we build for you"
           title={`Every ${industry.title} engagement can include.`}

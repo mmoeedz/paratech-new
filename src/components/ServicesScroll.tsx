@@ -8,7 +8,7 @@ import { Reveal } from "./Reveal";
 import { SERVICE_CATEGORIES } from "@/data/services";
 
 /** Scroll distance (in vh) allotted to each capability. */
-const VH_PER_STEP = 85;
+const VH_PER_STEP = 45;
 
 const COUNT = SERVICE_CATEGORIES.length;
 

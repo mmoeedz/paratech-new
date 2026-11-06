@@ -14,7 +14,6 @@ const NODES = [
 export function FlowScene() {
   return (
     <section className="relative overflow-clip bg-obsidian py-24 sm:py-28 lg:py-32">
-      <div aria-hidden="true" className="bg-blueprint absolute inset-0 opacity-60" />
       <div aria-hidden="true" className="bg-bloom-copper absolute inset-0" />
 
       <div className="relative mx-auto max-w-6xl px-6 text-center lg:px-8">

@@ -5,7 +5,7 @@ export const SITE = {
   // is appropriate (og:site_name, the WebSite schema's "name") — everyday
   // copy, the ProfessionalService schema, and per-page titles all keep the
   // short "ParaTech" brand name via `name` above.
-  legalName: "Paratech Solutions Ltd",
+  legalName: "Paratech Solutions LLC",
   // `||`, not `??` — an env var that exists but is left blank in Vercel's
   // dashboard is an empty string, not undefined, so `??` would let it
   // through and crash `new URL("")` at build time.
@@ -14,6 +14,17 @@ export const SITE = {
   // should point at, not the redirecting apex.
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.paratechsolutions.com",
   email: "contact@paratechsolutions.com",
+  // Display form for copy; `phoneHref` is the E.164 form for tel: links and
+  // schema.org's `telephone`.
+  phone: "(307) 247-8135",
+  phoneHref: "+13072478135",
+  // City-level only — no street address is published.
+  address: {
+    locality: "Casper",
+    region: "WY",
+    country: "US",
+    display: "Casper, Wyoming",
+  },
   tagline: "AI & Digital Solutions",
   description:
     "Paratech is a digital growth, technology, and AI automation partner. We design digital experiences, build software, drive growth, and automate business operations with AI.",

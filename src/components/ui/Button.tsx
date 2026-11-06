@@ -10,7 +10,7 @@ const base =
 
 const styles: Record<Variant, Record<Tone, string>> = {
   primary: {
-    dark: "bg-copper text-obsidian hover:bg-copper-light",
+    dark: "bg-grad-copper text-ivory shadow-[0_10px_30px_-10px_rgba(138,80,36,0.6)] transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(138,80,36,0.85)]",
     light: "bg-ink text-ivory hover:bg-copper-ink",
   },
   secondary: {

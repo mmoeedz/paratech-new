@@ -9,6 +9,7 @@ import { ArrowRight, PlusMinus } from "./ui/Icons";
 import { Logo } from "./ui/Logo";
 import { SERVICE_CATEGORIES } from "@/data/services";
 import { INDUSTRIES } from "@/data/industries";
+import { SITE } from "@/lib/site";
 
 const LINKS = [
   { label: "Work", href: "/work" },
@@ -150,7 +151,7 @@ export function Nav() {
         <div className="hidden lg:block">
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-copper px-5 py-2.5 text-sm font-medium text-obsidian transition-colors hover:bg-copper-light"
+            className="group inline-flex items-center gap-2 rounded-full bg-grad-copper px-5 py-2.5 text-sm font-medium text-ivory shadow-[0_10px_30px_-10px_rgba(138,80,36,0.6)] transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(138,80,36,0.85)]"
           >
             Start a project
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -326,11 +327,17 @@ export function Nav() {
             <Link
               href="/contact"
               onClick={closeMenu}
-              className="mt-7 flex items-center justify-center gap-2 rounded-full bg-copper px-5 py-3.5 text-sm font-medium text-obsidian transition-colors active:bg-copper-light"
+              className="mt-7 flex items-center justify-center gap-2 rounded-full bg-grad-copper px-5 py-3.5 text-sm font-medium text-ivory shadow-[0_10px_30px_-10px_rgba(138,80,36,0.6)] transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(138,80,36,0.85)]"
             >
               Start a project
               <ArrowRight className="h-4 w-4" />
             </Link>
+            <a
+              href={`tel:${SITE.phoneHref}`}
+              className="mt-4 text-center text-sm font-medium text-cloud-soft transition-colors active:text-copper"
+            >
+              Or call {SITE.phone}
+            </a>
           </nav>
         </div>
       )}
