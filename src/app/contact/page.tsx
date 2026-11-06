@@ -122,6 +122,33 @@ export default async function ContactPage(props: PageProps<"/contact">) {
                   Within one business day
                 </p>
               </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+                  Reviews
+                </p>
+                <p className="mt-2 text-base text-ink">
+                  Worked with us?{" "}
+                  <a
+                    href={SITE.trustpilotReviewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-copper-ink transition-colors hover:text-ink"
+                  >
+                    Leave a review on Trustpilot
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                  {" · "}
+                  <a
+                    href={SITE.social.trustpilot}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-copper-ink transition-colors hover:text-ink"
+                  >
+                    Read reviews
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
 

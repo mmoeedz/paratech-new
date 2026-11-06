@@ -31,7 +31,14 @@ export const SITE = {
   social: {
     instagram: "https://www.instagram.com/paratech.sol/",
     linkedin: "https://www.linkedin.com/company/paratechsolutions",
+    // Public Trustpilot profile. Listed here so it also lands in the
+    // schema.org `sameAs` array — it ties the review profile to this entity
+    // for Google. (Deliberately NOT turned into `aggregateRating` markup:
+    // Google ignores review markup a business writes about itself.)
+    trustpilot: "https://www.trustpilot.com/review/paratechsolutions.com",
   },
+  /** Where a customer goes to leave a Trustpilot review. */
+  trustpilotReviewUrl: "https://www.trustpilot.com/evaluate/paratechsolutions.com",
   // Names people actually search for us by (Search Console top queries),
   // used as schema.org alternateName so Google maps the variants to this
   // one entity instead of treating them as unrelated brands. Limited to
@@ -43,6 +50,9 @@ export const SITE = {
     "ParaTech Solutions",
     "Para Tech",
     "ParaTech Software Solutions",
+    // The bare domain-style spelling, which is also how the Trustpilot
+    // profile is titled.
+    "Paratechsolutions",
     "ParraTech",
     "ParaTechs",
     "PraTech",
