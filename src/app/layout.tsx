@@ -72,7 +72,11 @@ const organizationSchema = {
   name: SITE.name,
   alternateName: [...SITE.alternateNames],
   url: SITE.url,
-  logo: `${SITE.url}/icon.png`,
+  // Square, fully opaque black tile. The header logo on the page is a transparent PNG
+  // (white mark), which Google flattens onto white when it picks a thumbnail — so give it
+  // an explicit, non-transparent brand image for `logo` and `image` instead.
+  logo: `${SITE.url}/brand/paratech-logo-black-512.png`,
+  image: `${SITE.url}/brand/paratech-logo-black-512.png`,
   email: SITE.email,
   telephone: SITE.phoneHref,
   address: {
