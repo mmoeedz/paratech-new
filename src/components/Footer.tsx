@@ -73,6 +73,16 @@ export function Footer() {
                 </a>
               ))}
             </div>
+            <a
+              href={SITE.trustpilotReviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block text-sm text-cloud-soft transition-colors hover:text-copper"
+            >
+              Worked with us? Review us on Trustpilot
+              <span aria-hidden="true"> ↗</span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
 
           <nav aria-labelledby="footer-services" className="mt-10 lg:mt-0 lg:ml-10">
